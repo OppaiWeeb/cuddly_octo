@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.20)
 project(led_generator)
 find_package(raylib 4.0.0 REQUIRED)
 
