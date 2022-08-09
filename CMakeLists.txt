@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-project(hello)
+project(led_generator)
 find_package(raylib 4.0.0 REQUIRED)
 
 set(CMAKE_CXX_STANDARD 17)
