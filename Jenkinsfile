@@ -4,7 +4,9 @@ pipeline {
         stage('Check norme') {
         agent {docker 'epitechcontent/epitest-docker:latest'}
         steps {
-            sh 'echo "hello world"'
+            sh 'mkdir -p build && cd build'
+            sh 'cmake ..'
+            sh 'make'
             }
         }
     }
