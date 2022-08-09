@@ -2,7 +2,7 @@ pipeline {
     agent none
     stages {
         stage('Check norme') {
-            agent {docker 'epitechcontent/epitest-docker:latest'}
+            agent {docker 'alecromski/epitest:latest'}
             steps {
                 sh 'uname -a'
                 sh 'pwd '
