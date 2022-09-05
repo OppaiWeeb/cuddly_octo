@@ -11,4 +11,4 @@ add_executable(${PROJECT_NAME} ${SRCS} ${HEADER})
 target_link_libraries(${CMAKE_PROJECT_NAME} ${RAYLIB})
 target_link_libraries(${CMAKE_PROJECT_NAME} ${MATH})
 
-set(CMAKE_CFLAGS "${CMAKE_CFLAGS} -Ofast -O3 -Wall -Wextra -fanalyzer")
+set(CMAKE_CFLAGS "${CMAKE_CFLAGS} -Ofast -O3 -Wall -g2 -Wextra -fanalyzer")

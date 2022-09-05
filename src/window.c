@@ -2,7 +2,7 @@
 #include <raylib.h>
 #include <string.h>
 
-static window_t *init_window()
+window_t *init_window(void)
 {
     struct window_s *window = malloc(sizeof(window_t));
     if (!window)
@@ -25,10 +25,10 @@ static int get_event(Vector2 *ball)
     return (0);
 }
 
-int open_window(void)
+int open_window(window_t *window)
 {
-    window_t *window = init_window();
     Vector2 ballPosition = {(float)window->width/2, (float)window->height/2};
+    Vector2 mouse = GetMousePosition();
     while (!WindowShouldClose()) {
         get_event(&ballPosition);
         BeginDrawing();
@@ -38,6 +38,6 @@ int open_window(void)
         EndDrawing();
     }
     CloseWindow();
-    free(window);
+    free(window->window_name);
     return 0;
 }
