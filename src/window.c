@@ -1,6 +1,7 @@
 #include "../include/lib_led.h"
 #include <raylib.h>
 #include <string.h>
+#include "../include/raygui.h"
 
 static window_t *init_window()
 {
@@ -32,6 +33,8 @@ int open_window(void)
     while (!WindowShouldClose()) {
         get_event(&ballPosition);
         BeginDrawing();
+            if (GuiButton((Rectangle){ window->width - 170, window->height - 50, 150, 30 }, "Image Export")) printf("weesh\n");
+
             ClearBackground(GRAY);
             DrawText("move the ball with arrow keys", 10, 10, 20, BLACK);
             DrawCircleV(ballPosition, 50, RED);
