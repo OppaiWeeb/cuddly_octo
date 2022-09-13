@@ -1,4 +1,5 @@
 #include "../include/lib_led.h"
+#include <stdio.h>
 
 static char *get_date(void)
 {
@@ -9,11 +10,30 @@ static char *get_date(void)
     return (date);
 }
 
-char *open_file(char *filename)
+static FILE *check_file_state(char *filename)
 {
+    FILE *tmp = fopen(filename, "rb+");
+
+    if (tmp == NULL) {
+        printf("The File %s doesn't exist\nCreating File in progress\n", filename);
+        if ((tmp = fopen(filename, "wb+")) == NULL) {
+            printf("Error while Creating File\n");
+            return (NULL);
+        }
+    }
+    return (tmp);
+}
+
+FILE *open_file(char *filename)
+{
+    FILE *fptr = NULL;
+
     if (filename == NULL)
         filename = get_date();
     strcat(filename, ".led");
     printf("filename = %s\n", filename);
-    return (0);
+    fptr = check_file_state(filename);
+    if (fptr == NULL)
+        return (NULL);
+    return (fptr);
 }
