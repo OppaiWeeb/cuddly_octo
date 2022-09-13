@@ -5,7 +5,8 @@
 #include <string.h>
 #include <raylib.h>
 #include <time.h>
-#include "../include/raygui.h"
+#include "raygui.h"
+
 #define RAYGUI_IMPLEMENTATION
 
 typedef struct client_s
