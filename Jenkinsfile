@@ -14,10 +14,10 @@ pipeline {
     }
     post {
         success {
-            setBuildStatus("Build succeeded", "SUCCESS");
+            echo "success";
         }
         failure {
-            setBuildStatus("Build failed", "FAILURE");
+            echo "failure"
         }
     }
 }
