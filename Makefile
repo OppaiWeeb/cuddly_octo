@@ -37,7 +37,10 @@ clean:
 clean_led:
 	@ ${RM} *.led
 
-fclean: clean clean_led
+clean_valgrind:
+	@${RM} vgcore*
+
+fclean: clean clean_led clean_valgrind
 	${RM} ${NAME}
 
 re: fclean all
