@@ -27,5 +27,6 @@ typedef struct generator_led
     client_t *client_arrays;
 } generator_led_t;
 
-FILE *open_file(char const *filename);
+int open_file(char const *filename, generator_led_t *led);
 int open_window(window_t *window);
+int free_led(generator_led_t *led);
