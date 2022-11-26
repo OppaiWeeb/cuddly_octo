@@ -1,8 +1,7 @@
 #include <stdbool.h>
 #define RAYGUI_IMPLEMENTATION
 #include "../include/lib_led.h"
-#include "../sub/raygui/src/raygui.h"
-#include <raylib.h>
+#include "../include/raygui.h"
 
 static int update(window_t *window, bool *rect)
 {

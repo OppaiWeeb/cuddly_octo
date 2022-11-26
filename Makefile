@@ -1,5 +1,4 @@
 CC	=	gcc
-USE_WAYLAND_DISPLAY ?= TRUE
 
 NAME	=	cuddly_octo
 
@@ -8,7 +7,6 @@ SRC	=	src/main.c\
 	src/window.c\
 
 INCLUDE_DIR	=	./include/
-INCLUDE_LIB	=	./sub/raygui/src/
 
 CFLAGS 	+=	-g2 -Wall -Wextra
 
@@ -16,16 +14,9 @@ OBJ	=	${SRC:.c=.o}
 
 RM	=	rm -fr
 
-LDFLAGS	=	-lraylib -lGL -lm -lpthread -ldl -lrt
-# On X11 requires also below libraries
-LDFLAGS += -lX11
-# NOTE: It seems additional libraries are not required any more, latest GLFW just dlopen them
-#LDLIBS += -lXrandr -lXinerama -lXi -lXxf86vm -lXcursor
+LDFLAGS	=	-lraylib -lGL -lm -lpthread -ldl -lrt -lglfw -lX11
+LDFLAGS += -lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon
 
-# On Wayland windowing system, additional libraries requires
-ifeq ($(USE_WAYLAND_DISPLAY),TRUE)
-	# LDFLAGS += -lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon
-endif
 all: ${NAME}
 
 ${NAME}: ${OBJ}
@@ -45,4 +36,4 @@ fclean: clean clean_led clean_valgrind
 
 re: fclean all
 
-.PHONY: all clean fclean re ${NAME}
+.PHONY: all clean fclean re ${NAME} clean_led clean_valgrind
