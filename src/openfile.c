@@ -1,6 +1,4 @@
 #include "../include/lib_led.h"
-#include <stdio.h>
-#include <string.h>
 
 static char *get_date(void)
 {
@@ -23,18 +21,6 @@ static FILE *check_file_state(char *filename)
         }
     }
     return (tmp);
-}
-
-int free_led(generator_led_t *led)
-{
-    if (!led)
-        return (-1);
-    if (led->filename)
-        free(led->filename);
-    if (led->fptr)
-        fclose(led->fptr);
-    free(led);
-    return (0);
 }
 
 int open_file(char const *filepath, generator_led_t *led)
