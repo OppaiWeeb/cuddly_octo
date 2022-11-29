@@ -4,6 +4,8 @@ NAME	=	cuddly_octo
 
 SRC	=	src/main.c\
 	src/openfile.c\
+	src/led_ll.c\
+	src/select_file.c\
 	src/window.c\
 
 INCLUDE_DIR	=	./include/
@@ -15,12 +17,12 @@ OBJ	=	${SRC:.c=.o}
 RM	=	rm -fr
 
 LDFLAGS	=	-lraylib -lGL -lm -lpthread -ldl -lrt -lglfw -lX11
-LDFLAGS += -lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon
+LDFLAGS	+=	-lwayland-client -lwayland-cursor -lwayland-egl -lxkbcommon
 
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	gcc -iquote ${INCLUDE_DIR} -iquote ${INCLUDE_LIB} ${OBJ} -o ${NAME} ${LDFLAGS}
+	gcc -iquote ${INCLUDE_DIR} ${OBJ} -o ${NAME} ${LDFLAGS}
 
 clean:
 	${RM} ${OBJ}
