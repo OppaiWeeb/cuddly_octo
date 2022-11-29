@@ -3,6 +3,9 @@
 
 generator_led_t *search_elem(generator_led_t *list, char const *filepath)
 {
+    if (!filepath)
+        return (NULL);
+    printf("%s --> %s\n", filepath, list->filename);
     while(list)
         if (strcmp(filepath, list->filename))
             list->next = list;
