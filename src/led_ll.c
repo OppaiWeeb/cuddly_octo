@@ -1,20 +1,26 @@
 #include "../include/lib_led.h"
 #include <string.h>
 
-generator_led_t *search_elem(generator_led_t *list, char const *filepath)
+int search_elem(generator_led_t *list, char const *filepath)
 {
     if (!filepath)
-        return (NULL);
-    printf("%s --> %s\n", filepath, list->filename);
-    while(list)
+        return (1);
+    if (!list)
+        return (0);
+    while(list->next)
         if (strcmp(filepath, list->filename))
             list->next = list;
-
-    return (list);
+        else return (0);
+    return (1);
 }
 
 int print_node(generator_led_t *list)
 {
+    generator_led_t *tmp = list;
+
+    for (int i = 0; tmp; tmp = tmp->next) {
+        printf("%s\n", tmp->filename);
+    }
     return 0;
 }
 
@@ -35,7 +41,7 @@ int free_led_list(generator_led_t *list)
 return (0);
 }
 
-static generator_led_t *new_led_node(char const *filepath)
+generator_led_t *new_led_node(char const *filepath)
 {
     generator_led_t *new_node = malloc(sizeof(generator_led_t));
 
@@ -59,15 +65,8 @@ generator_led_t *add_node(generator_led_t *list, char const *filepath)
     if (!filepath)
         return (NULL);
     new_node = new_led_node(filepath);
-    if (!new_node && !list)
+    if (!new_node)
         return (NULL);
-    if (!new_node && list) {
-        free_led_list(list);
-        return (NULL);
-    }
-    if (!list)
-        list = new_node;
-    else
-        new_node->next = list;
+    new_node->next = list;
     return (new_node);
 }
