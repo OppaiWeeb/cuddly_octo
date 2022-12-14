@@ -1,21 +1,23 @@
 pipeline {
     agent none
     stages {
-        stage('Check norme') {
-            agent {docker 'alecromski/epitest:latest'}
+        stage('Build') {
+            agent {
+                docker {
+                    image 'alecromski/debian-xorg:latest'
+                }
+            }
             steps {
-                sh 'git submodule update --init'
-                sh 'make'
+                sh 'mkdir -p build && cd build && cmake .. && make'
             }
         }
-
     }
     post {
         success {
-            echo "success";
+            echo "5UCC355";
         }
         failure {
-            echo "failure"
+            echo "F41LUR3"
         }
     }
 }

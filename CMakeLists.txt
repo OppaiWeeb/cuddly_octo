@@ -14,6 +14,17 @@ FILE(GLOB HEADERS
     include/lib_led.h
     include/raylib.h)
 
-add_executable(${PROJECT_NAME} ${HEADERS} ${CFILES})
+find_library(math m)
+find_library(raylib raylib)
+find_library(glfw glfw3)
+find_library(wayland wayland-client)
+find_library(x11 X11)
 
+if (x11)
+    message("There is math std lib here")
+else()
+    message("were fucked up")
+endif()
+
+add_executable(${PROJECT_NAME} ${HEADERS} ${CFILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} raylib m)
