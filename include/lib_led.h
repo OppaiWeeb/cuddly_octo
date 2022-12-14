@@ -36,9 +36,10 @@ int open_file(char const *filename, generator_led_t *led);
 int open_window(window_t *window);
 int free_led_list(generator_led_t *led);
 
-int select_file_update(window_t *window, generator_led_t *list);
+generator_led_t *select_file_update(window_t *window, generator_led_t *list);
 generator_led_t *add_node(generator_led_t *list, char const *filepath);
-generator_led_t *search_elem(generator_led_t *list, char const *filepath);
+generator_led_t *new_led_node(char const *filepath);
+int search_elem(generator_led_t *list, char const *filepath);
 int print_node(generator_led_t *list);
 
 
