@@ -5,11 +5,11 @@
 #include "../include/lib_led.h"
 #include "../include/raygui.h"
 
-static int update(window_t *window, generator_led_t *list)
+static generator_led_t *update(window_t *window, generator_led_t *list)
 {
     switch (window->scene) {
         case SELECT_FILE:
-            select_file_update(window, list);
+            list = select_file_update(window, list);
             break;
         case WORK_ON_FILE:
             work_on_file_update();
@@ -24,7 +24,7 @@ static int update(window_t *window, generator_led_t *list)
             }
             break;
     }
-    return (0);
+    return (list);
 }
 
 static int draw(window_t *window)
@@ -60,7 +60,7 @@ int open_window(window_t *window)
     generator_led_t *list = NULL;
 
     while (!WindowShouldClose()) {
-        update(window, list);
+        list = update(window, list);
         draw(window);
     }
     CloseWindow();
