@@ -16,19 +16,36 @@ FILE(GLOB HEADERS
 
 find_library(math m)
 find_library(raylib raylib)
-find_library(glfw glfw3)
+find_library(glfw glfw)
 find_library(wayland wayland-client)
 find_library(x11 X11)
 
-if (x11)
-    execute_process(COMMAND bash -c "objdump -tC /usr/local/lib/libraylib.a | grep rglfw" OUTPUT_VARIABLE var)
-    message("This is ${var}")
-else()
-    message("were fucked up")
+if (NOT math)
+    message("No Math")
 endif()
 
-if (NOT var)
-    message("TOTO IS NOT HERE")
+if (NOT wayland)
+    message("NO wayland")
+    if (NOT X11)
+        message("No X11")
+    endif()
 endif()
+
+if (NOT raylib)
+    message("NO raylib")
+endif()
+
+
+
+execute_process(COMMAND bash -c "objdump -tC /usr/local/lib/libraylib.a | grep rglfw" OUTPUT_VARIABLE var)
+if (var)
+    message("GLFW no need at compile")
+else()
+    message("GLFW need at compile")
+    if (NOT glfw)
+        message("FUUUUCK")
+    endif()
+endif()
+
 add_executable(${PROJECT_NAME} ${HEADERS} ${CFILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} raylib m)
